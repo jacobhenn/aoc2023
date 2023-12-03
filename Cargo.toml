@@ -1,0 +1,23 @@
+[workspace]
+members = ["d*"]
+resolver = "2"
+
+[workspace.dependencies]
+anyhow = "1"
+itertools = "0.12"
+num = "0.4"
+tracing = "0.1"
+
+[workspace.dependencies.aocutil]
+path = "../aocutil"
+
+[workspace.dependencies.tracing-subscriber]
+version = "0.3"
+features = ["env-filter"]
+
+[profile.dev]
+opt-level = "z"
+
+# profiling only
+# [profile.release]
+# debug = true
