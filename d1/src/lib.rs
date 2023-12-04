@@ -61,5 +61,5 @@ fn part_one() {
 #[test]
 fn part_two() {
     let _ = aocutil::test_logger().try_init();
-    assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 0);
+    assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 55902);
 }
