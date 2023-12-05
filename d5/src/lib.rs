@@ -7,28 +7,48 @@ const DAY: usize = 5;
 fn solve<Part: AocPart>(input: &str) -> i64 {
     let mut pars = input.split("\n\n");
 
-    debug!("hi");
-    let mut seeds = ints::<i64>(pars.next().unwrap()).vec();
+    let mut seeds: RangeSet<i64> = RangeSet::new();
+    for [a, b] in ints::<i64>(pars.next().unwrap()).util_array_chunks() {
+        seeds.insert(Range::new(a, a + b - 1));
+    }
 
     for par in pars {
-        debug!("meow");
+        debug!("{seeds:?}");
         let map = par
             .lines()
             .skip(1)
             .map(|line| {
                 let ns = ints::<i64>(line).vec();
-                (ns[1]..(ns[1] + ns[2]), ns[0] - ns[1])
+                (Range::new(ns[1], ns[1] + ns[2] - 1), ns[0] - ns[1])
             })
             .vec();
 
-        for seed in &mut seeds {
-            if let Some((range, delta)) = map.iter().find(|(range, _)| range.contains(&seed)) {
-                *seed += delta;
+        let mut new_seeds: RangeSet<i64> = RangeSet::new();
+        let mut remaining_seeds: RangeSet<i64> = seeds.clone();
+
+        for (source_range, delta) in map {
+            debug!("  mapping {source_range:?}: {delta}");
+            for seed_range in seeds.ranges() {
+                debug!("    looking at seed range {seed_range:?}");
+                let intersection = source_range.intersection(*seed_range);
+                if intersection.start <= intersection.end {
+                    debug!("      found intersection {intersection:?}");
+                    new_seeds.insert(intersection.map(|bound| bound + delta));
+                    remaining_seeds.remove(intersection);
+                }
             }
         }
+
+        debug!("  remaining seeds: {remaining_seeds:?}");
+
+        for seed_range in remaining_seeds.into_ranges() {
+            new_seeds.insert(seed_range);
+        }
+
+        seeds = new_seeds;
     }
 
-    *seeds.iter().min().unwrap()
+    *seeds.min().unwrap()
 }
 
 const EXAMPLE_INPUT: &str = "seeds: 79 14 55 13
@@ -69,7 +89,7 @@ example_tests! {
     - part one:
         a0: EXAMPLE_INPUT => 35,
     - part two:
-        b0: EXAMPLE_INPUT => 0,
+        b0: EXAMPLE_INPUT => 46,
 }
 
 #[test]
