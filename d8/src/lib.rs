@@ -22,6 +22,8 @@ fn solve_a(instrs: &str, nodes: HashMap<&str, (&str, &str)>) -> usize {
 }
 
 fn solve_b(instrs: &str, nodes: HashMap<&str, (&str, &str)>) -> usize {
+    todo!();
+
     let mut current_nodes: HashSet<&str> = nodes
         .keys()
         .filter_map(|n| n.ends_with('A').then_some(*n))
