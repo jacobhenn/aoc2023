@@ -8,7 +8,7 @@ const DAY: usize = 3;
 
 fn solve<Part: AocPart>(input: &str) -> u32 {
     let mut grid: Grid<char> = input.lines().map(|line| line.chars()).collect();
-    print!("{}", grid.render(|c| *c));
+    print!("{}", grid.render(|_, c| *c));
 
     let mut part_numbers: HashSet<(usize, RangeInclusive<usize>, u32)> = HashSet::new();
 
@@ -78,7 +78,7 @@ fn solve<Part: AocPart>(input: &str) -> u32 {
 
     let mut res = 0;
 
-    for (pos, c) in grid.iter_with_pos() {
+    for (pos, c) in grid.iter_zm_with_pos() {
         if *c == '*' {
             let adjacent_part_numbers = part_numbers
                 .iter()
