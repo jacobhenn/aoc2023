@@ -4,7 +4,7 @@ const YEAR: usize = 2023;
 
 const DAY: usize = 5;
 
-fn solve<Part: AocPart>(input: &str) -> i64 {
+fn solve_b(input: &str) -> i64 {
     let mut pars = input.split("\n\n");
 
     let mut seeds: RangeSet<i64> = RangeSet::new();
@@ -51,6 +51,38 @@ fn solve<Part: AocPart>(input: &str) -> i64 {
     *seeds.min().unwrap()
 }
 
+fn solve_a(input: &str) -> i64 {
+    let mut pars = input.split("\n\n");
+
+    let mut seeds = ints::<i64>(pars.next().unwrap()).vec();
+
+    for par in pars {
+        let map = par
+            .lines()
+            .skip(1)
+            .map(|line| {
+                let ns = ints::<i64>(line).vec();
+                (ns[1]..(ns[1] + ns[2]), ns[0] - ns[1])
+            })
+            .vec();
+
+        for seed in &mut seeds {
+            if let Some((range, delta)) = map.iter().find(|(range, _)| range.contains(&seed)) {
+                *seed += delta;
+            }
+        }
+    }
+
+    *seeds.iter().min().unwrap()
+}
+
+fn solve<P: AocPart>(input: &str) -> i64 {
+    match P::part() {
+        Part::One => solve_a(input),
+        Part::Two => solve_b(input),
+    }
+}
+
 const EXAMPLE_INPUT: &str = "seeds: 79 14 55 13
 
 seed-to-soil map:
@@ -95,11 +127,14 @@ example_tests! {
 #[test]
 fn part_one() {
     let _ = aocutil::test_logger().try_init();
-    assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 0);
+    assert_eq!(
+        solve::<part::One>(&aocutil::get_input(YEAR, DAY)),
+        457535844
+    );
 }
 
 #[test]
 fn part_two() {
     let _ = aocutil::test_logger().try_init();
-    assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 0);
+    assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 41222968);
 }
