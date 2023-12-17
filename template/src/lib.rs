@@ -14,12 +14,12 @@ aoc_tests! {
     }
 
     part::One {
-        a0: ex => 374,
-        a: @input => 10077850,
+        a0: ex => 0,
+        a: @input => 0,
     }
 
     part::Two {
-        b0: ex => 82000210,
-        b: @input => 504715068438,
+        b0: ex => 0,
+        b: @input => 0,
     }
 }
