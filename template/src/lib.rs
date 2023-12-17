@@ -8,21 +8,18 @@ fn solve<Part: AocPart>(input: &str) -> usize {
     todo!()
 }
 
-example_tests! {
-    - part one:
-        a0: "" => 0,
-    - part two:
-        b0: "" => 0,
+aoc_tests! {
+    inputs {
+        ex = "",
+    }
+
+    part::One {
+        a0: EX => 374,
+        a: @input => 10077850,
+    }
+
+    part::Two {
+        b0: EX => 82000210,
+        b: @input => 504715068438,
+    }
 }
-
-// #[test]
-// fn part_one() {
-//     let _ = aocutil::test_logger().try_init();
-//     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 0);
-// }
-
-// #[test]
-// fn part_two() {
-//     let _ = aocutil::test_logger().try_init();
-//     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 0);
-// }

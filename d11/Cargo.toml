@@ -9,3 +9,4 @@ itertools.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 aocutil.workspace = true
+indoc.workspace = true

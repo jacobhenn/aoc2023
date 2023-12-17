@@ -8,6 +8,7 @@ itertools = "0.12"
 num = "0.4"
 tracing = "0.1"
 phf = { version = "0.10", features = ["macros"] }
+indoc = "2"
 
 [workspace.dependencies.aocutil]
 path = "../aocutil"

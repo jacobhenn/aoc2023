@@ -68,35 +68,30 @@ fn solve<P: AocPart>(input: &str) -> usize {
     total_dist
 }
 
-const EXAMPLE_INPUT: &str = "...#......
-.......#..
-#.........
-..........
-......#...
-.#........
-.........#
-..........
-.......#..
-#...#.....";
+aoc_tests! {
+    inputs {
+        ex = "
+            ...#......
+            .......#..
+            #.........
+            ..........
+            ......#...
+            .#........
+            .........#
+            ..........
+            .......#..
+            #...#.....
+        ",
 
-example_tests! {
-    - part one:
-        a0: EXAMPLE_INPUT => 374,
-    - part two:
-        b0: EXAMPLE_INPUT => 82000210,
-}
+    }
 
-#[test]
-fn part_one() {
-    let _ = aocutil::test_logger().try_init();
-    assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 10077850);
-}
+    part::One {
+        a0: ex => 374,
+        a: @input => 10077850,
+    }
 
-#[test]
-fn part_two() {
-    let _ = aocutil::test_logger().try_init();
-    assert_eq!(
-        solve::<part::Two>(&aocutil::get_input(YEAR, DAY)),
-        504715068438
-    );
+    part::Two {
+        b0: ex => 82000210,
+        b: @input => 504715068438,
+    }
 }
