@@ -4,7 +4,7 @@ const YEAR: usize = 2023;
 
 const DAY: usize = 11;
 
-fn solve<P: AocPart>(input: &str) -> usize {
+fn solve<P: AocPart>(input: &str, expansion_factor: usize) -> usize {
     let grid: Grid<char> = input.lines().map(|line| line.chars()).collect();
 
     let mut galaxies: Vec<GridPos> = grid.positions_zm().filter(|p| grid[*p] == '#').collect();
@@ -32,10 +32,7 @@ fn solve<P: AocPart>(input: &str) -> usize {
             let dst_x = cmp::max(src_galaxy[0], dst_galaxy[0]);
             for x in src_x..dst_x {
                 if expanding_columns.contains(&(x as usize)) {
-                    match P::part() {
-                        Part::One => x_dist += 2,
-                        Part::Two => x_dist += 1000000,
-                    }
+                    x_dist += expansion_factor;
                 } else {
                     x_dist += 1;
                 }
@@ -46,10 +43,7 @@ fn solve<P: AocPart>(input: &str) -> usize {
             let dst_y = cmp::max(src_galaxy[1], dst_galaxy[1]);
             for y in src_y..dst_y {
                 if expanding_rows.contains(&(y as usize)) {
-                    match P::part() {
-                        Part::One => x_dist += 2,
-                        Part::Two => x_dist += 1000000,
-                    }
+                    y_dist += expansion_factor;
                 } else {
                     y_dist += 1;
                 }
@@ -70,28 +64,26 @@ fn solve<P: AocPart>(input: &str) -> usize {
 
 aoc_tests! {
     inputs {
-        ex = "
-            ...#......
-            .......#..
-            #.........
-            ..........
-            ......#...
-            .#........
-            .........#
-            ..........
-            .......#..
-            #...#.....
-        ",
+        ex = "...#......
+.......#..
+#.........
+..........
+......#...
+.#........
+.........#
+..........
+.......#..
+#...#.....",
 
     }
 
     part::One {
-        a0: ex => 374,
-        a: @input => 10077850,
+        a0: ex, 2 => 374,
+        a: @input 2 => 10077850,
     }
 
     part::Two {
-        b0: ex => 82000210,
-        b: @input => 504715068438,
+        b0: ex, 1000000 => 82000210,
+        b: @input 1000000 => 504715068438,
     }
 }
