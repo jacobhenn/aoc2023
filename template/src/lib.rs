@@ -1,25 +1,25 @@
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize;
+pub const DAY: usize;
 
-fn solve<Part: AocPart>(input: &str) -> usize {
+pub fn solve<Part: AocPart>(input: &str) -> usize {
     todo!()
 }
 
 aoc_tests! {
     inputs {
-        ex = "",
+        e0 = "",
     }
 
     part::One {
-        a0: ex => 0,
-        a: @input => 0,
+        ea0: e0 => 0,
+        ra: @input => 0,
     }
 
     part::Two {
-        b0: ex => 0,
-        b: @input => 0,
+        eb0: e0 => 0,
+        rb: @input => 0,
     }
 }
