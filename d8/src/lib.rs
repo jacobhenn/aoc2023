@@ -7,9 +7,11 @@ pub const DAY: usize = 8;
 fn solve_a(steps: &[Step], nodes: HashMap<Node, (Node, Node)>) -> usize {
     let mut node = Node::aaa();
     for (idx, step) in steps.iter().cycle().enumerate() {
+        let (l, r) = nodes[&node];
+
         match step {
-            Step::Left => node = nodes.get(&node).expect("node should be present").0,
-            Step::Right => node = nodes.get(&node).expect("node should be present").1,
+            Step::Left => node = l,
+            Step::Right => node = r,
         }
 
         if node.is_zzz() {
