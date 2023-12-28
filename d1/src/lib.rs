@@ -1,22 +1,22 @@
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize = 1;
+pub const DAY: usize = 1;
 
-fn solve<Part: AocPart>(input: &str) -> usize {
+pub fn solve<Part: AocPart>(input: &str) -> usize {
     input
         .lines()
         .map(|line| {
             debug!("{line}");
-            let mut digits = ('0'..='9')
+            let mut digits: Vec<(usize, usize)> = ('0'..='9')
                 .enumerate()
                 .map(move |(digit, name)| {
                     line.match_indices(move |c| c == name)
                         .map(move |(i, _)| (i, digit))
                 })
                 .flatten()
-                .vec();
+                .collect();
 
             if Part::is_two() {
                 digits.extend(
@@ -30,7 +30,7 @@ fn solve<Part: AocPart>(input: &str) -> usize {
                 );
             }
 
-            digits.sort_by_key(|(pos, digit)| *pos);
+            digits.sort_by_key(|(pos, _digit)| *pos);
             10 * digits[0].1 + digits.last().unwrap().1
         })
         .sum()
@@ -54,12 +54,12 @@ zoneight234
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 56465);
 }
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 55902);
 }
