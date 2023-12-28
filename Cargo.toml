@@ -20,6 +20,9 @@ features = ["env-filter"]
 [profile.dev]
 opt-level = "z"
 
+[profile.bench]
+debug = true
+
 # profiling only
 # [profile.release]
 # debug = true
