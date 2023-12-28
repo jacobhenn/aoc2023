@@ -35,24 +35,13 @@ fn solve<Part: AocPart>(input: &str) -> u128 {
             .map(|(race_time, best_distance)| num_ways_to_win(race_time, best_distance))
             .product()
     } else {
-        let race_time: f64 = lines
+        let race_time: f64 = ints::<u64>(&lines.next().unwrap().replace(" ", ""))
             .next()
-            .unwrap()
-            .split_once(':')
-            .unwrap()
-            .1
-            .replace(" ", "")
-            .parse()
-            .unwrap();
-        let best_distance: f64 = lines
+            .unwrap() as f64;
+
+        let best_distance: f64 = ints::<u64>(&lines.next().unwrap().replace(" ", ""))
             .next()
-            .unwrap()
-            .split_once(':')
-            .unwrap()
-            .1
-            .replace(" ", "")
-            .parse()
-            .unwrap();
+            .unwrap() as f64;
 
         num_ways_to_win(race_time, best_distance)
     }
@@ -70,12 +59,12 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 5133600);
 }
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 40651271);
 }

@@ -18,7 +18,7 @@ pub fn solve<Part: AocPart>(input: &str) -> usize {
     let mut boxes: Vec<Vec<(&str, usize)>> = vec![Vec::new(); 256];
 
     for step in steps {
-        let (label, focal_length) = step.split_once(|c: char| !c.is_ascii_alphabetic()).unwrap();
+        let (label, focal_length) = step.split_once(['-', '=']).unwrap();
         let hash = holiday_hash(label);
 
         if focal_length.is_empty() {

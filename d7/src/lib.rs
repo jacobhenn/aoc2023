@@ -2,9 +2,9 @@ use std::cmp::Ordering;
 
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize = 7;
+pub const DAY: usize = 7;
 
 const CARD_ORDER_A: [char; 13] = [
     '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A',
@@ -108,7 +108,7 @@ impl Hand {
     }
 }
 
-fn solve<Part: AocPart>(input: &str) -> u32 {
+pub fn solve<Part: AocPart>(input: &str) -> u32 {
     let mut hands: Vec<(Hand, u32)> = input
         .lines()
         .map(|line| {
@@ -145,7 +145,7 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(
         solve::<part::One>(&aocutil::get_input(YEAR, DAY)),
         248836197
@@ -154,7 +154,7 @@ fn part_one() {
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(
         solve::<part::Two>(&aocutil::get_input(YEAR, DAY)),
         251195607

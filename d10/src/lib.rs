@@ -1,10 +1,8 @@
-use std::ops::Neg;
-
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize = 10;
+pub const DAY: usize = 10;
 
 static PIPE_DIRECTIONS: phf::Map<char, [RookDirection; 2]> = phf::phf_map! {
     '|' => [RookDirection::MINUS_Y, RookDirection::PLUS_Y],
@@ -47,7 +45,7 @@ fn uncover_start(mut grid: Grid<char>) -> (Grid<char>, GridPos) {
     (grid, start_pos)
 }
 
-fn solve<Part: AocPart>(input: &str) -> usize {
+pub fn solve<Part: AocPart>(input: &str) -> usize {
     let grid: Grid<char> = input.lines().map(|line| line.chars()).collect();
 
     debug!("parsed grid:\n{}", grid.render(|_, c| *c));
@@ -183,12 +181,12 @@ L7JLJL-JLJLJL--JLJ.L" => 10,
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 6714);
 }
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 429);
 }

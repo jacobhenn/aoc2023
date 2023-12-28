@@ -1,8 +1,8 @@
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize = 2;
+pub const DAY: usize = 2;
 
 #[derive(Default)]
 struct Draw {
@@ -49,7 +49,7 @@ impl FromStr for Draw {
     }
 }
 
-fn solve<P: AocPart>(input: &str) -> usize {
+pub fn solve<P: AocPart>(input: &str) -> usize {
     let games = input.lines().map(|line| {
         let (game_id, game) = line.split_once(':').unwrap();
         let game_id = ints::<usize>(game_id).next().unwrap();
@@ -78,6 +78,7 @@ fn solve<P: AocPart>(input: &str) -> usize {
     }
 }
 
+#[cfg(test)]
 const EXAMPLE_INPUT: &str = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
@@ -93,12 +94,12 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 2317);
 }
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 74804);
 }

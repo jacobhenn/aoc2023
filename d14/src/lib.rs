@@ -44,7 +44,7 @@ fn spin_cycle(grid: &Grid<char>, round_rocks: &mut HashSet<GridPos>) {
 fn north_total_load(grid: &Grid<char>, round_rocks: &HashSet<GridPos>) -> isize {
     round_rocks
         .iter()
-        .map(|round_rock| grid.dimension(1) as isize - round_rock[1])
+        .map(|round_rock| grid.height() as isize - round_rock[1])
         .sum()
 }
 

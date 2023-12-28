@@ -76,7 +76,7 @@ fn solve_a(input: &str) -> i64 {
     *seeds.iter().min().unwrap()
 }
 
-fn solve<P: AocPart>(input: &str) -> i64 {
+pub fn solve<P: AocPart>(input: &str) -> i64 {
     match P::part() {
         Part::One => solve_a(input),
         Part::Two => solve_b(input),
@@ -126,7 +126,7 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(
         solve::<part::One>(&aocutil::get_input(YEAR, DAY)),
         457535844
@@ -135,6 +135,6 @@ fn part_one() {
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 41222968);
 }

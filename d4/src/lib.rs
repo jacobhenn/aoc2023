@@ -1,8 +1,8 @@
 use aocutil::prelude::*;
 
-const YEAR: usize = 2023;
+pub const YEAR: usize = 2023;
 
-const DAY: usize = 4;
+pub const DAY: usize = 4;
 
 fn score(card: &str) -> (usize, usize) {
     let (x, y) = card.split_once("|").unwrap();
@@ -25,7 +25,7 @@ fn score(card: &str) -> (usize, usize) {
     (score, matching)
 }
 
-fn solve<Part: AocPart>(input: &str) -> usize {
+pub fn solve<Part: AocPart>(input: &str) -> usize {
     let mut cards: Vec<(&str, usize)> = input.lines().map(|line| (line, 1)).collect();
 
     if Part::is_one() {
@@ -45,7 +45,7 @@ fn solve<Part: AocPart>(input: &str) -> usize {
         }
     }
 
-    cards.iter().map(|(card, count)| count).sum()
+    cards.iter().map(|(_card, count)| count).sum()
 }
 
 const EXAMPLE_INPUT: &str = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
@@ -64,12 +64,12 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::One>(&aocutil::get_input(YEAR, DAY)), 21959);
 }
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 5132675);
 }

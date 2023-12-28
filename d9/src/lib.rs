@@ -10,8 +10,9 @@ fn solve<P: AocPart>(input: &str) -> i32 {
         .map(|line| {
             let mut sequences: Vec<Vec<i32>> = vec![ints(line).collect()];
             while !sequences.last().unwrap().iter().all_equal() {
-                let sequence = sequences.last().unwrap();
-                let diffs = sequence
+                let diffs = sequences
+                    .last()
+                    .unwrap()
                     .iter()
                     .tuple_windows()
                     .map(|(n, m)| m - n)
@@ -58,7 +59,7 @@ example_tests! {
 
 #[test]
 fn part_one() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(
         solve::<part::One>(&aocutil::get_input(YEAR, DAY)),
         1898776583
@@ -67,6 +68,6 @@ fn part_one() {
 
 #[test]
 fn part_two() {
-    let _ = aocutil::test_logger().try_init();
+    let _ = aocutil::log::test_subscriber().try_init();
     assert_eq!(solve::<part::Two>(&aocutil::get_input(YEAR, DAY)), 1100);
 }
