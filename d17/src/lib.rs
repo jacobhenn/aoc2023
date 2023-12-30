@@ -23,9 +23,10 @@ impl<P: AocPart + 'static> Graph for CrucibleGraph<P> {
 
     type Distance = u32;
 
-    type Neighbors<'a> = Box<dyn Iterator<Item = (u32, CrucibleNode)> + 'a>;
-
-    fn neighbors<'a>(&'a self, center: &'a Self::Node) -> Self::Neighbors<'a> {
+    fn neighbors<'a>(
+        &'a self,
+        center: &'a Self::Node,
+    ) -> impl Iterator<Item = (Self::Distance, Self::Node)> {
         Box::new(RookDirection::iter().filter_map(|d| {
             let streak_guard = match P::part() {
                 Part::One => d == center.direction && center.streak == 3,
