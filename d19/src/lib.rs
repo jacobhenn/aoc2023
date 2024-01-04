@@ -14,7 +14,7 @@ impl Part {
     fn parse(s: &str) -> Self {
         Self {
             ratings: s
-                .trim_matches(&['{', '}'] as &[char])
+                .trim_matches(['{', '}'])
                 .split(',')
                 .map(|rating| {
                     let mut chars = rating.chars();
