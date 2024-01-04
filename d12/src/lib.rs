@@ -170,6 +170,6 @@ aoc_tests! {
 
     part::Two {
         eb0: e0 => 525152,
-        rb: @input => 0,
+        rb: @input => 10153896718999,
     }
 }
